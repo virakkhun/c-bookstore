@@ -1,11 +1,18 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 
-const title = ref("This is user home page");
+const title = ref("");
+
+title.value = "This is homepage";
+
+onMounted(() => {
+  console.log(useRoute().name);
+});
 </script>
 
 <template>
   <div>
-    <h1 class="text-center">{{ title }}</h1>
+    <h1 class="text-center">{{ title.toUpperCase() }}</h1>
   </div>
 </template>
