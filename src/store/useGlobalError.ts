@@ -19,7 +19,6 @@ const globalError = defineStore("globalError", {
   },
   actions: {
     setError(payload: any): void {
-      console.log(payload);
       this.message = payload;
     },
     clearError(): void {
@@ -28,7 +27,7 @@ const globalError = defineStore("globalError", {
           msg: "",
           status: 0,
         };
-      }, 2000);
+      }, 3000);
     },
   },
 });
