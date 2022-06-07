@@ -11,6 +11,7 @@ const routes = [
     component: userHome,
     meta: {
       title: "Home",
+      requireAuth: true,
     },
   },
   {
@@ -48,16 +49,16 @@ router.beforeEach((to, from, next) => {
 /**
  * For Authenticated user only
  */
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some((record) => record.meta.requireAuth)) {
-//     if (localStorage.getItem("token")) {
-//       next();
-//     } else {
-//       next("/login_register");
-//     }
-//   } else {
-//     next();
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requireAuth)) {
+    if (localStorage.getItem("token")) {
+      next();
+    } else {
+      next("/login_register");
+    }
+  } else {
+    next();
+  }
+});
 
 export default router;
