@@ -12,5 +12,9 @@
       "Access-Control-Allow-Origin": "*"
     }
   },
-  "error_page": "./dist/404.html"
+  "proxies": {
+    "/api/": {
+      "origin": "https://c-bookstore.herokuapp.com/api"
+    }
+  }
 }

@@ -16,3 +16,4 @@ onMounted(() => {
     <h1 class="text-center">{{ title.toUpperCase() }}</h1>
   </div>
 </template>
+/
