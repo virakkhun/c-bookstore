@@ -1,3 +1,23 @@
 {
-  "root": "./dist"
+  "root": "./dist",
+  "canonical_host": "https://c-bookstore-front.herokuapp.com/",
+  "encoding": "US-ASCII",
+  "clean_urls": true,
+  "routes": {
+    "/assets/*": "/assets/",
+    "/**": "index.html"
+  },
+  "redirects": {
+    "/old/gone/": {
+      "url": "/404",
+      "status": 302
+    }
+  },
+  "https_only" : true,
+  "basic_auth": true,
+  "headers": {
+    "/**": {
+      "Access-Control-Allow-Origin": "*"
+    }
+  }
 }
