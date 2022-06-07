@@ -7,12 +7,6 @@
     "/assets/*": "/assets/",
     "/**": "index.html"
   },
-  "redirects": {
-    "/old/gone/": {
-      "url": "/404",
-      "status": 302
-    }
-  },
   "https_only" : true,
   "basic_auth": true,
   "headers": {
