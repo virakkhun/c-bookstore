@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import useGlobalError from "../store/useGlobalError";
+import useUser from "../store/useUsers";
 
 const email = ref("");
 const password = ref("");
@@ -8,6 +9,7 @@ const confirm = ref("");
 const isNotValid = ref(false);
 
 const main = useGlobalError();
+const user = useUser();
 
 const handleSubmit = (): void => {
   if (email.value === "" && password.value === "" && confirm.value === "") {
@@ -32,9 +34,13 @@ const handleSubmit = (): void => {
     isNotValid.value = true;
   } else {
     isNotValid.value = false;
-    main.setError({ msg: "Welcome to our online bookstore! TA DA", status: 1 });
-    main.clearError();
     // submit form to the api endpoint, call an action from pinia
+    const createUSer = user.createUser({
+      username: email.value,
+      email: email.value,
+      password: password.value,
+      image: "",
+    });
   }
 };
 
