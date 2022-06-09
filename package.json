@@ -12,6 +12,7 @@
     "dotenv": "^16.0.1",
     "pinia": "^2.0.14",
     "vue": "^3.2.25",
+    "vue-ionicons": "^3.0.5",
     "vue-router": "4"
   },
   "devDependencies": {
