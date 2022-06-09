@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { computed, ref } from "vue";
 import useGlobalError from "../store/useGlobalError";
+import useUser from "../store/useUsers";
 const email = ref("");
 const password = ref("");
 const isNotValid = ref(false);
 const { setError, clearError } = useGlobalError();
+const { login } = useUser();
 
 const handleSubmit = (): void => {
   if (email.value === "" && password.value === "") {
@@ -27,10 +29,12 @@ const handleSubmit = (): void => {
     clearError();
     isNotValid.value = true;
   } else {
-    setError({ msg: "You are login! TA DA", status: 0 });
-    clearError();
     isNotValid.value = false;
     // submit the form to the api endpoint
+    const login_success = login({
+      email: email.value,
+      password: password.value,
+    });
   }
 };
 

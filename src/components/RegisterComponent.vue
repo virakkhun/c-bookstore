@@ -35,11 +35,20 @@ const handleSubmit = (): void => {
   } else {
     isNotValid.value = false;
     // submit form to the api endpoint, call an action from pinia
+    let username = "";
+
+    if (email.value.indexOf("@") !== 1) {
+      username = email.value.split("@")[0];
+    }
+
     const createUSer = user.createUser({
-      username: email.value,
+      username: username,
       email: email.value,
       password: password.value,
       image: "",
+      department: "",
+      telephone: "",
+      status: "",
     });
   }
 };
