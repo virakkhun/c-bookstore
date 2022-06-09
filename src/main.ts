@@ -6,6 +6,7 @@ import "./index.css";
 import "./http/axios";
 import "../src/assets/styles/index.css";
 
+
 const app = createApp(App);
 app.use(router);
 app.use(createPinia());
