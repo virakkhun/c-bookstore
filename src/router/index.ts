@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-import userHome from "../views/users/index.vue";
+import userHome from "../views/index.vue";
 import loginOrRegister from "../views/users/login_register.vue";
 import errorPageNotFound from "../views/404.vue";
 

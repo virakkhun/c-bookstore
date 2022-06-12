@@ -6,9 +6,11 @@ const route = useRoute();
 </script>
 
 <template>
-  <div class="wrapper lg:px-0">
+  <div>
     <Header v-if="route.name !== 'login_register'" />
-    <router-view></router-view>
+    <div class="wrapper lg:px-10 md:px-5 px-2">
+      <router-view></router-view>
+    </div>
     <Footer v-if="route.name !== 'login_register'" />
   </div>
 </template>
