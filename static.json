@@ -15,7 +15,7 @@
   "https_only": true,
   "proxies": {
     "/api/": {
-      "origin": "https://c-bookstore.herokuapp.com/api"
+      "origin": "https://c-bookstore.herokuapp.com/api/"
     }
   }
 }
