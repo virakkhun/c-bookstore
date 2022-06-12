@@ -10,9 +10,9 @@
   "dependencies": {
     "axios": "^0.27.2",
     "dotenv": "^16.0.1",
+    "epic-spinners": "^1.1.0",
     "pinia": "^2.0.14",
     "vue": "^3.2.25",
-    "vue-ionicons": "^3.0.5",
     "vue-router": "4"
   },
   "devDependencies": {

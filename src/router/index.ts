@@ -3,6 +3,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import userHome from "../views/users/index.vue";
 import loginOrRegister from "../views/users/login_register.vue";
 import errorPageNotFound from "../views/404.vue";
+import IndexBook from "../views/books/index.vue";
 
 const routes = [
   {
@@ -20,6 +21,15 @@ const routes = [
     component: loginOrRegister,
     meta: {
       title: "Login | Register",
+    },
+  },
+  {
+    path: "/books",
+    name: "index.book",
+    component: IndexBook,
+    meta: {
+      title: "Books",
+      requireAuth: true,
     },
   },
   {
@@ -54,7 +64,7 @@ router.beforeEach((to, from, next) => {
     if (localStorage.getItem("token")) {
       next();
     } else {
-      next("/login_register");
+      next("/");
     }
   } else {
     next();

@@ -1,12 +1,18 @@
 <script setup lang="ts">
+import { HollowDotsSpinner } from "epic-spinners";
 import { computed, ref } from "vue";
+import { useRouter } from "vue-router";
 import useGlobalError from "../store/useGlobalError";
-import useUser from "../store/useUsers";
+import useUser from "../store/users";
+
 const email = ref("");
 const password = ref("");
 const isNotValid = ref(false);
+
 const { setError, clearError } = useGlobalError();
 const { login } = useUser();
+
+const router = useRouter();
 
 const handleSubmit = (): void => {
   if (email.value === "" && password.value === "") {
@@ -21,25 +27,30 @@ const handleSubmit = (): void => {
     setError({ msg: "Please input your password.", status: 0 });
     clearError();
     isNotValid.value = true;
-  } else if (password.value.length !== 6) {
+  } else if (password.value.length < 6) {
     setError({
       msg: "Password must be at least 6 characters long.",
       status: 0,
     });
     clearError();
-    isNotValid.value = true;
   } else {
     isNotValid.value = false;
     // submit the form to the api endpoint
-    const login_success = login({
+    login({
       email: email.value,
       password: password.value,
+    }).then(() => {
+      setError({
+        msg: "You are login success fully!",
+        status: 1,
+      });
+      router.push("/books");
     });
   }
 };
 
 const blurPassword = (): void => {
-  if (password.value.length !== 6) {
+  if (password.value.length < 6) {
     setError({
       msg: "Password must be at least 6 characters long.",
       status: 0,
@@ -145,10 +156,18 @@ const passwordIsValid = computed((): boolean => {
     <hr />
     <div class="flex justify-center items-center mt-5">
       <button
-        class="login-btn rounded-md border border-indigo-600 px-5 py-2 focus:outline-none hover:bg-indigo-600 hover:text-white transition-all"
+        class="login-btn rounded-md border border-indigo-600 px-5 py-2 focus:outline-none hover:bg-indigo-600 hover:text-white transition-all flex"
       >
         Login
       </button>
+      <div class="px-5 py-2 hidden">
+        <hollow-dots-spinner
+          :animation-duration="1000"
+          :dot-size="10"
+          :dots-num="3"
+          color="#6b21a8"
+        />
+      </div>
     </div>
   </form>
 </template>
