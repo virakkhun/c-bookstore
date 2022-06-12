@@ -20,51 +20,51 @@ const isShowMenu = ref(false);
             @click="isShowMenu = !isShowMenu"
           ></ion-icon>
         </div>
-          <div
-            class="md:static absolute left-0 md:bg-transparent bg-white w-full md:p-0 p-3 transition-all"
-            :class="isShowMenu ? 'block transition-all' : 'md:block hidden'"
+        <div
+          class="modal md:static absolute left-0 md:bg-transparent bg-white w-full md:p-0 p-3 transition-all"
+          :class="isShowMenu ? 'block transition-all' : 'md:block hidden'"
+        >
+          <ul
+            class="modal md:flex md:flex-row flex flex-col md:items-center items-start md:gap-10 gap-3"
           >
-            <ul
-              class="md:flex md:flex-row flex flex-col md:items-center items-start md:gap-10 gap-3"
-            >
-              <li class="">
-                <router-link
-                  to="/"
-                  class="text-base hover:text-primary duration-300"
-                  >Home</router-link
-                >
-              </li>
-              <li class="">
-                <router-link
-                  to="/book"
-                  class="text-base hover:text-primary duration-300"
-                  >Book</router-link
-                >
-              </li>
-              <li class="">
-                <router-link
-                  to="login_register"
-                  class="text-base hover:text-primary duration-300"
-                  >About Us</router-link
-                >
-              </li>
-              <li class="">
-                <router-link
-                  to="login_register"
-                  class="text-base hover:text-primary duration-300"
-                  >Contact US</router-link
-                >
-              </li>
-              <li class="">
-                <router-link
-                  to="/login_register"
-                  class="text-base bg-midPrimary hover:bg-primary hover:text-white rounded-md md:px-7 px-2 md:py-2 py-1 duration-300"
-                >
-                  Login
-                </router-link>
-              </li>
-            </ul>
-          </div>
+            <li class="">
+              <router-link
+                to="/"
+                class="text-base hover:text-primary duration-300"
+                >Home</router-link
+              >
+            </li>
+            <li class="">
+              <router-link
+                to="/books"
+                class="text-base hover:text-primary duration-300"
+                >Book</router-link
+              >
+            </li>
+            <li class="">
+              <router-link
+                to="login_register"
+                class="text-base hover:text-primary duration-300"
+                >About Us</router-link
+              >
+            </li>
+            <li class="">
+              <router-link
+                to="login_register"
+                class="text-base hover:text-primary duration-300"
+                >Contact US</router-link
+              >
+            </li>
+            <li class="">
+              <router-link
+                to="/login_register"
+                class="text-base bg-midPrimary hover:bg-primary hover:text-white rounded-md md:px-7 px-2 md:py-2 py-1 duration-300"
+              >
+                Login
+              </router-link>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
   </nav>

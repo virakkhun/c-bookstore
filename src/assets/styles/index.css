@@ -1,13 +1,7 @@
-@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap');
-
-body {
-  font-family: 'JetBrains Mono', monospace;
-  background-color: #e5e5e5;
-}
-
 .fade-enter-active {
   animation: fade 500ms;
 }
+
 .fade-leave-active {
   animation: fade-out 400ms;
 }
@@ -17,6 +11,7 @@ body {
     transform: translateX(-5%);
     opacity: 0;
   }
+
   100% {
     transform: translateX(0%);
     opacity: 1;
@@ -28,6 +23,7 @@ body {
     transform: translateX(0%);
     opacity: 1;
   }
+
   100% {
     transform: translateX(5%);
     opacity: 0;
@@ -37,19 +33,24 @@ body {
 .isError {
   animation: shake 300ms linear;
 }
+
 @keyframes shake {
   0% {
     transform: translateX(-2%);
   }
+
   25% {
     transform: translateX(2%);
   }
+
   50% {
     transform: translateX(-2%);
   }
+
   75% {
     transform: translateX(2%);
   }
+
   100% {
     transform: translateX(0%);
   }
@@ -58,6 +59,7 @@ body {
 .error-enter-active {
   animation: error 400ms;
 }
+
 .error-leave-active {
   animation: error 400ms reverse;
 }
@@ -67,11 +69,17 @@ body {
     transform: translateY(-10%);
     opacity: 0;
   }
+
   50% {
     transform: translateY(5%);
   }
+
   100% {
     transform: translateY(0%);
     opacity: 1;
   }
+}
+
+.modal {
+  z-index: 9999;
 }

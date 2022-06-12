@@ -1,12 +1,15 @@
 <script setup lang="ts">
+import { HollowDotsSpinner } from "epic-spinners";
 import { computed, ref } from "vue";
+import router from "../router";
 import useGlobalError from "../store/useGlobalError";
-import useUser from "../store/useUsers";
+import useUser from "../store/users";
 
 const email = ref("");
 const password = ref("");
 const confirm = ref("");
 const isNotValid = ref(false);
+const isLoading = ref(false);
 
 const main = useGlobalError();
 const user = useUser();
@@ -34,12 +37,27 @@ const handleSubmit = (): void => {
     isNotValid.value = true;
   } else {
     isNotValid.value = false;
+    isLoading.value = true;
     // submit form to the api endpoint, call an action from pinia
+    let username = "";
+
+    if (email.value.indexOf("@") !== 1) {
+      username = email.value.split("@")[0];
+    }
+
     const createUSer = user.createUser({
-      username: email.value,
+      username: username,
       email: email.value,
       password: password.value,
       image: "",
+      department: "",
+      telephone: "",
+      status: "",
+    });
+
+    createUSer.then(() => {
+      isLoading.value = false;
+      router.push("/");
     });
   }
 };
@@ -166,12 +184,21 @@ const isMatched = computed((): boolean => {
       </div>
     </div>
     <hr />
-    <div class="flex justify-center items-center mt-5">
+    <div class="flex justify-center items-center my-5">
       <button
+        v-if="!isLoading"
         class="login-btn rounded-md border border-indigo-400 px-5 py-2 hover:bg-indigo-400 hover:text-white transition-all"
       >
         Register
       </button>
+      <div v-else class="my-5">
+        <hollow-dots-spinner
+          :animation-duration="1000"
+          :dot-size="10"
+          :dots-num="3"
+          color="#6b21a8"
+        />
+      </div>
     </div>
   </form>
 </template>
