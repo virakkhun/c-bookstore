@@ -21,11 +21,11 @@ const isShowMenu = ref(false);
           ></ion-icon>
         </div>
         <div
-          class="md:static absolute left-0 md:bg-transparent bg-white w-full md:p-0 p-3 transition-all"
+          class="modal md:static absolute left-0 md:bg-transparent bg-white w-full md:p-0 p-3 transition-all"
           :class="isShowMenu ? 'block transition-all' : 'md:block hidden'"
         >
           <ul
-            class="md:flex md:flex-row flex flex-col md:items-center items-start md:gap-10 gap-3"
+            class="modal md:flex md:flex-row flex flex-col md:items-center items-start md:gap-10 gap-3"
           >
             <li class="">
               <router-link
@@ -36,7 +36,7 @@ const isShowMenu = ref(false);
             </li>
             <li class="">
               <router-link
-                to="/book"
+                to="/books"
                 class="text-base hover:text-primary duration-300"
                 >Book</router-link
               >
