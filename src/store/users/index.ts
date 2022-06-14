@@ -1,29 +1,39 @@
 import { defineStore } from "pinia";
-import state from "./state";
-import getters from "./getters";
 import axios from "axios";
 import router from "../../router";
 
-const useUser = defineStore("user", {
+export const useUser = defineStore("user", {
   state: () => {
     return {
-      state,
+      user: "",
+      msg: "",
+      token: "",
     };
   },
-  getters,
+  getters: {
+    getUser(state: any): object {
+      return state.user;
+    },
+    getMessage(state: any): string {
+      return state.msg;
+    },
+    getToken(state: any): string {
+      return state.token;
+    },
+  },
   actions: {
-    async createUser(payload: any) {
+    async createUser(payload: any): Promise<void> {
       const res = await axios.post("students/register", payload);
       const status = await res.data.status;
       const message = await res.data.message;
 
       if (status === 1) {
-        this.state.msg = message;
+        this.msg = message;
       } else {
-        this.state.msg = "Fail to create";
+        this.msg = "Fail to create";
       }
     },
-    async login(payload: any) {
+    async login(payload: any): Promise<void> {
       try {
         const res = await axios.post("students/login", payload);
 
@@ -31,18 +41,17 @@ const useUser = defineStore("user", {
         const token = await res.data.token;
         const status = await res.data.status;
         if (status === 1) {
-          this.state.user = data.data;
+          this.user = data.data;
+          this.token = token;
           localStorage.setItem("token", token);
-          router.push("/");
-          this.state.msg = "You have logged in. TADA!";
+          await router.push("/");
+          this.msg = "You have logged in. TADA!";
         } else {
-          this.state.msg = "The credentials you are providing is not correct.";
+          this.msg = "The credentials you are providing is not correct.";
         }
       } catch (error: any) {
-        this.state.msg = error.response.data.message;
+        this.msg = error.response.data.message;
       }
     },
   },
 });
-
-export default useUser;

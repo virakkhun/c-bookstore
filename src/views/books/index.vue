@@ -1,17 +1,29 @@
 <script setup lang="ts">
-import { onBeforeMount, ref } from "vue";
+import { onMounted, ref } from "vue";
 import BookCardComponent from "../../components/books/BookCardComponent.vue";
-import useBook from "../../store/books";
-import useCategories from "../../store/categories";
+import { useBooks } from "../../store/books";
+import { useCategories } from "../../store/categories";
 import FilterComponent from "../../components/FilterComponent.vue";
-const string = ref("");
+import { ScalingSquaresSpinner } from "epic-spinners";
+import { computed } from "@vue/reactivity";
 
-const books = useBook();
+const string = ref("");
+const isLoading = ref(false);
+
+const books = useBooks();
 const categories = useCategories();
 
-onBeforeMount(() => {
-  categories.fetchCategories();
+onMounted(() => {
   books.fetchBooks();
+  categories.fetchCategories();
+});
+
+const category = computed((): string[] => {
+  return categories.getCategories;
+});
+
+const _books = computed(() => {
+  return books.getAllBooks;
 });
 </script>
 
@@ -44,11 +56,21 @@ onBeforeMount(() => {
       </div>
     </div>
     <div class="mx-auto w-1/2 md:mt-16 mt-8">
-      <FilterComponent :items="categories.getCategories" />
+      <FilterComponent :items="category" />
     </div>
     <div class="product-wrapper md:my-16 my-8">
+      <div v-if="isLoading" class="flex justify-center items-center">
+        <div>
+          <scaling-squares-spinner
+            :animation-duration="1500"
+            :size="65"
+            color="#ff1d5e"
+          />
+          <p class="mt-5">Loading...</p>
+        </div>
+      </div>
       <div class="grid md:grid-cols-4 grid-cols-2 md:gap-4 gap-2">
-        <div v-for="(book, id) in books.getAllBooks" :key="id">
+        <div v-for="(book, id) in _books" :key="id">
           <BookCardComponent
             :id="id"
             :title="book.title"

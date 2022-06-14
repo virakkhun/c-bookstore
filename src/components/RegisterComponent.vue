@@ -3,7 +3,7 @@ import { HollowDotsSpinner } from "epic-spinners";
 import { computed, ref } from "vue";
 import router from "../router";
 import useGlobalError from "../store/useGlobalError";
-import useUser from "../store/users";
+import { useUser } from "../store/users";
 
 const email = ref("");
 const password = ref("");

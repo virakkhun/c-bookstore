@@ -1,7 +1,7 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 
-const useCategories = defineStore("category", {
+export const useCategories = defineStore("category", {
   state: () => ({
     categories: [],
   }),
@@ -11,11 +11,11 @@ const useCategories = defineStore("category", {
     },
   },
   actions: {
-    async fetchCategories() {
-      const res = await axios.post("/categories");
+    async fetchCategories(): Promise<void> {
+      const res = await axios.get("/categories");
       if (res.data) {
-        const result = res.data.data;
-        const filteresult = result.map((res: any) => res.cat_name);
+        const result = await res.data.data;
+        const filteresult = await result.map((res: any) => res.cat_name);
         this.categories = filteresult;
       } else {
         this.categories.push();
@@ -23,5 +23,3 @@ const useCategories = defineStore("category", {
     },
   },
 });
-
-export default useCategories;
