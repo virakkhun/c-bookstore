@@ -3,17 +3,18 @@ import { createRouter, createWebHistory } from "vue-router";
 import DefaultLayout from "../components/layouts/default.vue";
 import AuthLayout from "../components/layouts/auth.vue";
 import userHome from "../views/index.vue";
-import loginOrRegister from "../views/users/login_register.vue";
 import errorPageNotFound from "../views/404.vue";
-import IndexBook from "../views/books/index.vue";
+import indexBook from "../views/books/index.vue";
+import login from "../views/auth/login.vue";
+import register from "../views/auth/register.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/home",
     component: DefaultLayout,
     children: [
       {
-        path: "/home",
+        path: "/",
         name: "home",
         component: userHome,
         meta: {
@@ -23,8 +24,8 @@ const routes = [
       },
       {
         path: "/books",
-        name: "index.book",
-        component: IndexBook,
+        name: "book",
+        component: indexBook,
         meta: {
           title: "Books",
           requireAuth: true,
@@ -49,10 +50,17 @@ const routes = [
     component: AuthLayout,
     children: [
       {
-        path: "/login_register",
-        component: loginOrRegister,
+        path: "/login",
+        component: login,
         meta: {
-          title: "Login | Register",
+          title: "Login",
+        },
+      },
+      {
+        path: "/register",
+        component: register,
+        meta: {
+          title: "Register",
         },
       },
     ],
@@ -77,7 +85,7 @@ router.beforeEach((to, from, next) => {
     if (localStorage.getItem("token")) {
       next();
     } else {
-      next("/");
+      next("/login");
     }
   } else {
     next();

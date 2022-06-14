@@ -1,24 +1,22 @@
 import { defineStore } from "pinia";
 import axios from "axios";
-const useBooks = defineStore("book", {
+export const useBooks = defineStore("book", {
   state: () => {
     return {
       books: [],
     };
   },
   getters: {
-    getAllBooks(state: any): any[] {
+    getAllBooks(state: any) {
       return state.books;
     },
   },
   actions: {
-    async fetchBooks() {
-      const res = await axios.post("/books");
+    async fetchBooks(): Promise<void> {
+      const res = await axios.get("/books");
       if (res.data) {
         this.books = res.data.data;
       }
     },
   },
 });
-
-export default useBooks;
