@@ -101,3 +101,23 @@
     opacity: 1;
   }
 }
+
+.pop-up-setting-enter-active {
+  animation: pop-up-setting 300ms;
+}
+
+.pop-up-setting-leave-active {
+  animation: pop-up-setting 300ms reverse;
+}
+
+@keyframes pop-up-setting {
+  0% {
+    transform: translateY(-15%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0%);
+    opacity: 1;
+  }
+}

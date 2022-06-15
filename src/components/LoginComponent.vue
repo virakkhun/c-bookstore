@@ -35,11 +35,12 @@ const handleSubmit = (): void => {
     clearError();
   } else {
     isNotValid.value = false;
+
     // submit the form to the api endpoint
     login({
       email: email.value,
       password: password.value,
-    }).then(() => {
+    }).then((): void => {
       setError({
         msg: "You are login success fully!",
         status: 1,

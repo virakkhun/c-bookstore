@@ -7,6 +7,7 @@ import errorPageNotFound from "../views/404.vue";
 import indexBook from "../views/books/index.vue";
 import login from "../views/auth/login.vue";
 import register from "../views/auth/register.vue";
+import userProfile from "../views/users/index.vue";
 
 const routes = [
   {
@@ -28,6 +29,15 @@ const routes = [
         component: indexBook,
         meta: {
           title: "Books",
+          requireAuth: true,
+        },
+      },
+      {
+        path: "/profile",
+        name: "profileUser",
+        component: userProfile,
+        meta: {
+          title: "Profile",
           requireAuth: true,
         },
       },
