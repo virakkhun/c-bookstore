@@ -20,6 +20,9 @@ export const useUser = defineStore("user", {
     getToken(state: any): string {
       return state.token;
     },
+    getUserName(state: any): string {
+      return state.user.username;
+    },
   },
   actions: {
     async createUser(payload: any): Promise<void> {
@@ -36,14 +39,13 @@ export const useUser = defineStore("user", {
     async login(payload: any): Promise<void> {
       try {
         const res = await axios.post("students/login", payload);
-
-        const data = await res.data;
-        const token = await res.data.token;
-        const status = await res.data.status;
+        const uuid: string = await res.data.data.id;
+        const token: string = await res.data.token;
+        const status: number = await res.data.status;
         if (status === 1) {
-          this.user = data.data;
           this.token = token;
           localStorage.setItem("token", token);
+          localStorage.setItem("uuid", uuid);
           await router.push("/");
           this.msg = "You have logged in. TADA!";
         } else {
@@ -52,6 +54,17 @@ export const useUser = defineStore("user", {
       } catch (error: any) {
         this.msg = error.response.data.message;
       }
+    },
+    async fetchUser(): Promise<void> {
+      const res = await axios.get(`students/${localStorage.getItem("uuid")}`);
+      const data = await res.data.data;
+      if (res) {
+        this.user = data;
+      }
+    },
+    async logout(): Promise<void> {
+      localStorage.clear();
+      router.push("/login");
     },
   },
 });
