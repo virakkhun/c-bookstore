@@ -7,7 +7,7 @@ defineProps<{
   id?: number;
   image: string;
 }>();
-const path = "http://localhost:8000";
+
 const isShowBtn = ref(false);
 </script>
 
@@ -19,11 +19,7 @@ const isShowBtn = ref(false);
         @mouseover="isShowBtn = true"
         @mouseleave="isShowBtn = false"
       >
-        <img
-          :src="`${path}/${image}`"
-          alt="book"
-          class="w-full h-full object-cover"
-        />
+        <img :src="image" alt="book" class="w-full h-full object-cover" />
         <Transition name="fadeOpacity">
           <div
             v-if="isShowBtn"

@@ -43,21 +43,21 @@ const isShowMenu = ref(false);
             </li>
             <li class="">
               <router-link
-                to="login_register"
+                to="#"
                 class="text-base hover:text-primary duration-300"
                 >About Us</router-link
               >
             </li>
             <li class="">
               <router-link
-                to="login_register"
+                to="login"
                 class="text-base hover:text-primary duration-300"
                 >Contact US</router-link
               >
             </li>
             <li class="">
               <router-link
-                to="/login_register"
+                to="/login"
                 class="text-base bg-midPrimary hover:bg-primary hover:text-white rounded-md md:px-7 px-2 md:py-2 py-1 duration-300"
               >
                 Login
