@@ -121,3 +121,45 @@
     opacity: 1;
   }
 }
+
+.fadeUpMenu-enter-active {
+  animation: fadeUpMenu 500ms;
+}
+
+.fadeUpMenu-leave-active {
+  animation: fadeUpMenu 500ms reverse;
+}
+
+@keyframes fadeUpMenu {
+  0% {
+    transform: translateX(50%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateX(0%);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 640px) {
+  .fadeUpMenu-enter-active {
+    animation: fadeUpMenu 300ms;
+  }
+
+  .fadeUpMenu-leave-active {
+    animation: fadeUpMenu 300ms reverse;
+  }
+
+  @keyframes fadeUpMenu {
+    0% {
+      transform: translateY(-20%);
+      opacity: 0;
+    }
+
+    100% {
+      transform: translateY(0%);
+      opacity: 1;
+    }
+  }
+}

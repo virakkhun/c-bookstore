@@ -23,7 +23,7 @@ const _getUser: any = computed((): object => {
         class="md:w-40 md:h-40 w-28 h-28 rounded-full border border-midPrimary shadow-md relative flex items-center justify-center"
       >
         <img
-          :src="_getUser.image ? _getUser.image : getRandomImage"
+          :src="_getUser.image === '' ? getRandomImage : _getUser.image"
           class="object-cover rounded-full"
         />
       </div>
