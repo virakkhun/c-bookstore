@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import MessageComponent from "../MessageComponent.vue";
-import useGlobalError from "../../store/useGlobalError";
+import { useGlobalMessage } from "../../store/useGlobalMessage";
 
-const message = useGlobalError();
+const message = useGlobalMessage();
 </script>
 <template>
   <div

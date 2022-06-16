@@ -1,12 +1,17 @@
 import { defineStore } from "pinia";
 
-const globalError = defineStore("globalError", {
+interface MessageDetail {
+  msg: string;
+  status: number;
+}
+
+export const useGlobalMessage = defineStore("globalMessage", {
   state: () => {
     return {
       message: {
         msg: "",
         status: 0,
-      },
+      } as MessageDetail,
     };
   },
   getters: {
@@ -18,7 +23,7 @@ const globalError = defineStore("globalError", {
     },
   },
   actions: {
-    setError(payload: any): void {
+    setError(payload: MessageDetail): void {
       this.message = payload;
     },
     clearError(): void {
@@ -31,5 +36,3 @@ const globalError = defineStore("globalError", {
     },
   },
 });
-
-export default globalError;

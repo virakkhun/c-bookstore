@@ -1,29 +1,51 @@
 <script setup lang="ts">
 import { HollowDotsSpinner } from "epic-spinners";
-import { computed, ref } from "vue";
+import { computed, Ref, ref } from "vue";
 import router from "../router";
-import useGlobalError from "../store/useGlobalError";
+import { useGlobalMessage } from "../store/useGlobalMessage";
 import { useUser } from "../store/users";
 
-const email = ref("");
-const password = ref("");
+interface User {
+  username: string;
+  email: string;
+  password: string;
+  image: string;
+  department: string;
+  telephone: string;
+  status: string;
+}
+
+const userCredential: Ref<User> = ref({
+  email: ref(""),
+  username: ref(""),
+  password: ref(""),
+  image: ref(""),
+  department: ref(""),
+  telephone: ref(""),
+  status: ref(""),
+});
+
 const confirm = ref("");
 const isNotValid = ref(false);
 const isLoading = ref(false);
 
-const main = useGlobalError();
+const main = useGlobalMessage();
 const user = useUser();
 
 const handleSubmit = (): void => {
-  if (email.value === "" && password.value === "" && confirm.value === "") {
+  if (
+    userCredential.value.email === "" &&
+    userCredential.value.password === "" &&
+    confirm.value === ""
+  ) {
     main.setError({ msg: "Please fill out the provided fields!", status: 0 });
     main.clearError();
     isNotValid.value = true;
-  } else if (email.value === "") {
+  } else if (userCredential.value.email === "") {
     main.setError({ msg: "Please fill out the email!", status: 0 });
     main.clearError();
     isNotValid.value = true;
-  } else if (password.value === "") {
+  } else if (userCredential.value.password === "") {
     main.setError({ msg: "Please fill out the password!", status: 0 });
     main.clearError();
     isNotValid.value = true;
@@ -31,7 +53,7 @@ const handleSubmit = (): void => {
     main.setError({ msg: "Please fill out the confirm password!", status: 0 });
     main.clearError();
     isNotValid.value = true;
-  } else if (password.value !== confirm.value) {
+  } else if (userCredential.value.password !== confirm.value) {
     main.setError({ msg: "The password doesn't not match!!", status: 0 });
     main.clearError();
     isNotValid.value = true;
@@ -39,20 +61,18 @@ const handleSubmit = (): void => {
     isNotValid.value = false;
     isLoading.value = true;
     // submit form to the api endpoint, call an action from pinia
-    let username = "";
+    let name: string = "";
 
-    if (email.value.indexOf("@") !== 1) {
-      username = email.value.split("@")[0];
+    if (userCredential.value.email.indexOf("@") !== 1) {
+      name = userCredential.value.email.split("@")[0];
     }
 
-    const createUSer = user.createUser({
-      username: username,
-      email: email.value,
-      password: password.value,
-      image: "",
-      department: "",
-      telephone: "",
-      status: "",
+    const createUSer: Promise<void> = user.createUser({
+      user: {
+        username: name,
+        email: userCredential.value.email,
+        password: userCredential.value.password,
+      },
     });
 
     createUSer.then(() => {
@@ -63,7 +83,7 @@ const handleSubmit = (): void => {
 };
 
 const emailIsValid = computed((): boolean => {
-  if (email.value === "" && isNotValid.value === true) {
+  if (userCredential.value.email === "" && isNotValid.value === true) {
     return true;
   } else {
     return false;
@@ -71,7 +91,7 @@ const emailIsValid = computed((): boolean => {
 });
 
 const passwordIsValid = computed((): boolean => {
-  if (password.value === "" && isNotValid.value === true) {
+  if (userCredential.value.password === "" && isNotValid.value === true) {
     return true;
   } else {
     return false;
@@ -87,7 +107,7 @@ const confirmIsValid = computed((): boolean => {
 });
 
 const isMatched = computed((): boolean => {
-  if (password.value === confirm.value) {
+  if (userCredential.value.password === confirm.value) {
     return false;
   } else {
     return true;
@@ -112,7 +132,7 @@ const isMatched = computed((): boolean => {
           id="email"
           class="border border-blue-500 py-2 pl-2 rounded focus:outline-none w-full"
           :class="emailIsValid ? 'isError' : ''"
-          v-model="email"
+          v-model="userCredential.email"
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +159,7 @@ const isMatched = computed((): boolean => {
           id="password"
           class="border border-blue-500 py-2 pl-2 rounded focus:outline-none w-full"
           :class="passwordIsValid ? 'isError' : ''"
-          v-model="password"
+          v-model="userCredential.password"
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"

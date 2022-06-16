@@ -1,10 +1,15 @@
 import axios from "axios";
 import { defineStore } from "pinia";
 
+interface Categories {
+  categories: string[];
+}
+
 export const useCategories = defineStore("category", {
-  state: () => ({
-    categories: [],
-  }),
+  state: () =>
+    ({
+      categories: [],
+    } as Categories),
   getters: {
     getCategories(state): string[] {
       return state.categories;
