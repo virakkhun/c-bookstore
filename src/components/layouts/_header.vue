@@ -86,7 +86,7 @@ const getRandomImage = computed((): string => {
             </li>
             <li class="">
               <router-link
-                to="login"
+                to="/#"
                 class="text-base hover:text-primary duration-300"
                 >Contact US</router-link
               >

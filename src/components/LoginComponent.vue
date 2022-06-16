@@ -2,14 +2,14 @@
 import { HollowDotsSpinner } from "epic-spinners";
 import { computed, ref } from "vue";
 import { useRouter } from "vue-router";
-import useGlobalError from "../store/useGlobalError";
+import { useGlobalMessage } from "../store/useGlobalMessage";
 import { useUser } from "../store/users";
 
 const email = ref("");
 const password = ref("");
 const isNotValid = ref(false);
 
-const { setError, clearError } = useGlobalError();
+const { setError, clearError } = useGlobalMessage();
 const { login } = useUser();
 
 const router = useRouter();
