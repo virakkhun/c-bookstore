@@ -12,6 +12,8 @@ interface BookDetail {
   location: string;
   release_date: string;
   status: number;
+  view?: number;
+  reader?: number;
 }
 
 interface Books {
