@@ -1,16 +1,21 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from "vue";
 import { useUser } from "../../store/users";
-const isShowMenu = ref(false);
-const isShowLogin = ref(false);
-const loginPop = ref();
+import { useDark, useToggle } from "@vueuse/core";
+
+const isShowMenu = ref<boolean>(false);
+const isShowLogin = ref<boolean>(false);
+const loginPop = ref<HTMLElement | null>(null);
 
 const user = useUser();
 
+const isDark = useDark();
+const toggleDarkMode = useToggle(isDark);
+
 onMounted(() => {
   const loginPopup = loginPop.value;
-  document.body.addEventListener("click", (e) => {
-    if (!loginPopup.contains(e.target)) {
+  document.body.addEventListener("click", (e: any) => {
+    if (!loginPopup?.contains(e.target)) {
       isShowLogin.value = false;
     }
   });
@@ -37,7 +42,9 @@ const getRandomImage = computed((): string => {
 </script>
 
 <template>
-  <nav class="w-full bg-white md:px-6 py-2 px-3 md:items-center">
+  <nav
+    class="w-full bg-white dark:bg-slate-900 md:px-6 py-2 px-3 md:items-center"
+  >
     <div class="flex justify-between items-center relative">
       <div>
         <img
@@ -46,12 +53,12 @@ const getRandomImage = computed((): string => {
           alt=""
         />
       </div>
-      <div class="bg-white flex items-center md:gap-10">
+      <div class="bg-white dark:bg-slate-900 flex items-center md:gap-10">
         <Transition name="fadeUpMenu" mode="out-in">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 512 512"
-            class="h-5 w-5 fill-midPrimary hover:fill-primary cursor-pointer transition-all"
+            class="h-5 w-5 fill-midPrimary dark:fill-white hover:fill-primary dark:hover:fill-slate-500 cursor-pointer transition-all"
             @click="isShowMenu = !isShowMenu"
             v-if="!isShowMenu"
           >
@@ -60,41 +67,41 @@ const getRandomImage = computed((): string => {
             />
           </svg>
           <ul
-            class="modal md:flex md:flex-row flex flex-col md:static absolute left-0 top-0 rounded-md bg-white md:w-auto w-full md:px-0 px-4 py-2 justify-end items-center md:gap-10 gap-4"
+            class="modal md:flex md:flex-row flex flex-col md:static absolute left-0 top-0 rounded-md bg-white dark:bg-slate-900 dark:text-white md:w-auto w-full md:px-0 px-4 py-2 justify-end items-center md:gap-10 gap-4"
             v-else
           >
             <li class="">
               <router-link
                 to="/"
-                class="text-base hover:text-primary duration-300"
+                class="text-base hover:text-primary dark:hover:text-midPrimary duration-300"
                 >Home</router-link
               >
             </li>
             <li class="">
               <router-link
                 to="/books"
-                class="text-base hover:text-primary duration-300"
+                class="text-base hover:text-primary dark:hover:text-midPrimary duration-300"
                 >Libray</router-link
               >
             </li>
             <li class="">
               <router-link
                 to="#"
-                class="text-base hover:text-primary duration-300"
+                class="text-base hover:text-primary dark:hover:text-midPrimary duration-300"
                 >About Us</router-link
               >
             </li>
             <li class="">
               <router-link
                 to="/#"
-                class="text-base hover:text-primary duration-300"
+                class="text-base hover:text-primary dark:hover:text-midPrimary duration-300"
                 >Contact US</router-link
               >
             </li>
             <li>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 cursor-pointer fill-midPrimary"
+                class="h-5 w-5 cursor-pointer fill-midPrimary dark:fill-white"
                 viewBox="0 0 320 512"
                 @click="isShowMenu = false"
               >
@@ -107,7 +114,7 @@ const getRandomImage = computed((): string => {
         </Transition>
       </div>
       <div
-        class="cursor-pointer rounded-full border border-midPrimary flex justify-center items-end p-1 relative"
+        class="cursor-pointer rounded-full border border-midPrimary dark:border-white dark:text-white flex justify-center items-end p-1 relative"
         @click="isShowLogin = !isShowLogin"
         ref="loginPop"
       >
@@ -118,32 +125,51 @@ const getRandomImage = computed((): string => {
         />
         <Transition name="pop-up-setting">
           <div
-            class="absolute md:top-12 top-10 md:text-base text-sm right-0 rounded shadow-md bg-white md:w-36 w-24 md:pl-3 pl-1 md:py-4 py-2 border"
+            class="absolute md:top-12 top-10 md:text-base text-sm right-0 rounded shadow-md bg-white dark:bg-slate-900 md:w-36 w-24 md:pl-3 pl-1 md:py-4 py-2 border"
             v-if="isShowLogin"
           >
-            <div
-              class="flex items-center gap-2 hover:text-primary"
-              v-if="!isAuth"
-            >
-              <div>
+            <div v-if="!isAuth">
+              <div
+                class="flex items-center gap-2 hover:text-primary dark:hover:text-midPrimary"
+                @click="toggleDarkMode()"
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
-                  class="md:h-5 md:w-5 h-3 w-3"
+                  class="h-5 w-5"
                   viewBox="0 0 20 20"
                   fill="currentColor"
                 >
                   <path
                     fill-rule="evenodd"
-                    d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+                    d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm1.414 8.486l-.707.707a1 1 0 01-1.414-1.414l.707-.707a1 1 0 011.414 1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z"
                     clip-rule="evenodd"
                   />
                 </svg>
+                <p>{{ isDark ? "Light" : "Dark" }}</p>
               </div>
-              <router-link to="/login">Login</router-link>
+              <div
+                class="flex items-center gap-2 hover:text-primary dark:hover:text-midPrimary"
+              >
+                <div>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="md:h-5 md:w-5 h-3 w-3"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fill-rule="evenodd"
+                      d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
+                      clip-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+                <router-link to="/login">Login</router-link>
+              </div>
             </div>
             <div v-else>
               <div
-                class="flex items-center gap-2 hover:text-primary"
+                class="flex items-center gap-2 hover:text-primary dark:hover:text-midPrimary"
                 :class="isAuth ? 'mt-0' : 'md:mt-4 mt-2'"
               >
                 <div>

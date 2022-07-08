@@ -8,6 +8,7 @@ import indexBook from "../views/books/index.vue";
 import login from "../views/auth/login.vue";
 import register from "../views/auth/register.vue";
 import userProfile from "../views/users/index.vue";
+import registerEmail from "../views/auth/sing-up-email.vue";
 
 const routes = [
   {
@@ -72,6 +73,10 @@ const routes = [
         meta: {
           title: "Register",
         },
+      },
+      {
+        path: "/register/email",
+        component: registerEmail,
       },
     ],
   },

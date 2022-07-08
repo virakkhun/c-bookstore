@@ -82,11 +82,13 @@ const passwordIsValid = computed((): boolean => {
 <template>
   <form @submit.prevent="handleSubmit" class="relative">
     <div class="text-center mb-6">
-      <h1 class="text-2xl mb-4">Hello Again!</h1>
-      <p class="text-gray-600">Login to borrow many books as you wish.</p>
+      <h1 class="text-2xl mb-4 dark:text-white">Hello Again!</h1>
+      <p class="text-gray-600 dark:text-white">
+        Login to borrow many books as you wish.
+      </p>
     </div>
     <div class="mb-5 flex flex-col">
-      <label for="email" class="text-gray-600">
+      <label for="email" class="text-gray-600 dark:text-white">
         Email
         <span v-if="emailIsValid" class="text-red-500 text-lg">*</span>
       </label>
@@ -95,7 +97,7 @@ const passwordIsValid = computed((): boolean => {
           type="email"
           name="email"
           id="email"
-          class="border border-blue-500 py-2 pl-2 rounded focus:outline-none w-full"
+          class="border border-blue-500 dark:bg-midDark dark:text-white py-2 pl-2 rounded focus:outline-none w-full"
           :class="emailIsValid ? 'isError' : ''"
           v-model="email"
         />
@@ -113,7 +115,7 @@ const passwordIsValid = computed((): boolean => {
       </div>
     </div>
     <div class="mb-3 flex flex-col w-full">
-      <label for="password" class="text-gray-600">
+      <label for="password" class="text-gray-600 dark:text-white">
         Password
         <span v-if="passwordIsValid" class="text-red-500 text-lg">*</span>
       </label>
@@ -122,7 +124,7 @@ const passwordIsValid = computed((): boolean => {
           type="password"
           name="password"
           id="password"
-          class="border border-blue-500 py-2 pl-2 rounded focus:outline-none w-full"
+          class="border border-blue-500 dark:bg-midDark dark:text-white py-2 pl-2 rounded focus:outline-none w-full"
           :class="passwordIsValid ? 'isError' : ''"
           v-model="password"
           @blur="blurPassword"
@@ -142,7 +144,9 @@ const passwordIsValid = computed((): boolean => {
     </div>
     <div class="mb-5 flex justify-between">
       <div class="flex items-center gap-2">
-        <label for="rmb" class="text-gray-600">Remember me</label>
+        <label for="rmb" class="text-gray-600 dark:text-white"
+          >Remember me</label
+        >
         <input
           type="checkbox"
           name="remember_me"
@@ -151,13 +155,15 @@ const passwordIsValid = computed((): boolean => {
         />
       </div>
       <div>
-        <p class="text-indigo-600 cursor-pointer">Forgot password?</p>
+        <p class="text-indigo-600 dark:text-secondary cursor-pointer">
+          Forgot password?
+        </p>
       </div>
     </div>
     <hr />
     <div class="flex justify-center items-center mt-5">
       <button
-        class="login-btn rounded-md border border-indigo-600 px-5 py-2 focus:outline-none hover:bg-indigo-600 hover:text-white transition-all flex"
+        class="login-btn rounded-md border border-indigo-600 dark:text-white dark:border-white px-5 py-2 focus:outline-none hover:bg-indigo-600 dark:hover:text-midDark dark:hover:bg-white transition-all flex"
       >
         Login
       </button>
