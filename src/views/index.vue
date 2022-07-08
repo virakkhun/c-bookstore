@@ -1,15 +1,10 @@
-<script setup lang="ts">
-import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
-</script>
-
 <template>
   <div>
     <div
       class="w-full h-96 md:flex md:flex-row flex flex-col justify-between items-center"
     >
       <div
-        class="md:w-1/2 w-full bg-midPrimary h-full flex justify-center items-center"
+        class="md:w-1/2 w-full bg-midPrimary dark:bg-midDark dark:text-white h-full flex justify-center items-center"
       >
         <div class="w-full h-full flex justify-start items-center">
           <div class="ml-10">
@@ -18,7 +13,7 @@ import { useRoute } from "vue-router";
           </div>
         </div>
       </div>
-      <div class="md:w-1/2 w-full">
+      <div class="md:w-1/2 w-full flex justify-center items-center">
         <img
           src="/src/assets/images/reading_book.svg"
           class="w-3/4"
@@ -26,7 +21,7 @@ import { useRoute } from "vue-router";
         />
       </div>
     </div>
-    <div class="w-full bg-white">
+    <div class="w-full bg-white dark:bg-midDark dark:text-white">
       <div class="text-center md:py-4 py-2 md:px-0 px-5">
         <h1 class="text-3xl">What We Do</h1>
         <p class="md:w-1/2 w-full md:px-0 mx-auto mt-5">
@@ -38,9 +33,9 @@ import { useRoute } from "vue-router";
         <div class="mx-auto max-w-fit mt-5 items-center">
           <router-link
             to="/books"
-            class="flex items-center px-5 py-3 md:text-base text-sm bg-midPrimary hover:bg-primary rounded"
+            class="flex items-center px-5 py-3 md:text-base text-sm bg-midPrimary dark:bg-midDark hover:bg-primary dark:hover:bg-midPrimary rounded"
           >
-            <span> Browse Book </span>
+            <span class="dark:text-white"> Browse Book </span>
           </router-link>
         </div>
       </div>

@@ -163,3 +163,14 @@
     }
   }
 }
+
+.switchMode-enter-active,
+.switchMode-enter-active {
+  transition: all 400ms ease;
+}
+
+.switchMode-enter-from,
+.switchMode-enter-from {
+  opacity: 0;
+  transform: rotate(360);
+}

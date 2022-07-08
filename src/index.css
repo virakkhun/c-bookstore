@@ -9,4 +9,14 @@
     font-family: 'Poppins', sans-serif;
     background-color: #e5e5e5;
   }
+  
+  html.dark {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply dark:bg-midDark;
+  }
+
 }
+

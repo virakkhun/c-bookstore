@@ -8,11 +8,15 @@ const getCurrentDate = computed(() => {
 </script>
 
 <template>
-  <footer class="w-full bg-white p-6 md:items-center bottom-0">
+  <footer
+    class="w-full bg-white dark:bg-slate-900 p-6 md:items-center bottom-0"
+  >
     <div class="md:px-5 px-5 container mx-auto">
       <div class="flex items-center justify-center">
         <div class="flex items-center">
-          <p class="text-center text-sm items-center text-midDark">
+          <p
+            class="text-center text-sm items-center text-midDark dark:text-white"
+          >
             {{ getCurrentDate }} | Ⓒ CopyRight By Young Dev
           </p>
         </div>

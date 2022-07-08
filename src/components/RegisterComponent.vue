@@ -118,11 +118,13 @@ const isMatched = computed((): boolean => {
 <template>
   <form @submit.prevent="handleSubmit">
     <div class="text-center mb-6">
-      <h1 class="text-2xl mb-4">What's up</h1>
-      <p class="text-gray-600">Register to borrow many books as you wish.</p>
+      <h1 class="text-2xl mb-4 dark:text-white">What's up</h1>
+      <p class="text-gray-600 dark:text-white">
+        Register to borrow many books as you wish.
+      </p>
     </div>
     <div class="mb-5 flex flex-col">
-      <label for="email" class="text-gray-600">
+      <label for="email" class="text-gray-600 dark:text-white">
         Email<span v-if="emailIsValid" class="text-red-500 text-lg">*</span>
       </label>
       <div class="relative">
@@ -130,7 +132,7 @@ const isMatched = computed((): boolean => {
           type="email"
           name="email"
           id="email"
-          class="border border-blue-500 py-2 pl-2 rounded focus:outline-none w-full"
+          class="border border-blue-500 dark:text-white dark:bg-midDark py-2 pl-2 rounded focus:outline-none w-full"
           :class="emailIsValid ? 'isError' : ''"
           v-model="userCredential.email"
         />
@@ -148,7 +150,7 @@ const isMatched = computed((): boolean => {
       </div>
     </div>
     <div class="mb-5 flex flex-col w-full">
-      <label for="password" class="text-gray-600">
+      <label for="password" class="text-gray-600 dark:text-white">
         Password
         <span v-if="passwordIsValid" class="text-red-500 text-lg">*</span>
       </label>
@@ -157,7 +159,7 @@ const isMatched = computed((): boolean => {
           type="password"
           name="password"
           id="password"
-          class="border border-blue-500 py-2 pl-2 rounded focus:outline-none w-full"
+          class="border border-blue-500 dark:text-white dark:bg-midDark py-2 pl-2 rounded focus:outline-none w-full"
           :class="passwordIsValid ? 'isError' : ''"
           v-model="userCredential.password"
         />
@@ -175,7 +177,7 @@ const isMatched = computed((): boolean => {
       </div>
     </div>
     <div class="mb-5 flex flex-col w-full">
-      <label for="password" class="text-gray-600">
+      <label for="password" class="text-gray-600 dark:text-white">
         Confirm Password
         <span v-if="confirmIsValid || isMatched" class="text-red-500 text-lg"
           >*</span
@@ -186,7 +188,7 @@ const isMatched = computed((): boolean => {
           type="password"
           name="confirm"
           id="confrim"
-          class="border border-blue-500 py-2 pl-2 rounded focus:outline-none w-full"
+          class="border border-blue-500 dark:text-white dark:bg-midDark py-2 pl-2 rounded focus:outline-none w-full"
           :class="confirmIsValid || isMatched ? 'isError' : ''"
           v-model="confirm"
         />
