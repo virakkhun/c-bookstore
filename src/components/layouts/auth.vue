@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import MessageComponent from "../MessageComponent.vue";
 import { useGlobalMessage } from "../../store/useGlobalMessage";
+import Header from "./_header.vue";
 
 const message = useGlobalMessage();
 </script>
 <template>
+  <Header />
   <div
     class="w-full h-screen flex justify-center items-center bg-no-repeat bg-cover relative px-4 lg:px-0"
   >

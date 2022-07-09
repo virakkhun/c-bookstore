@@ -1,9 +1,12 @@
 <script setup lang="ts">
 import { HollowDotsSpinner } from "epic-spinners";
 import { computed, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 import { useGlobalMessage } from "../store/useGlobalMessage";
 import { useUser } from "../store/users";
+
+const { t } = useI18n();
 
 const email = ref("");
 const password = ref("");
@@ -82,14 +85,14 @@ const passwordIsValid = computed((): boolean => {
 <template>
   <form @submit.prevent="handleSubmit" class="relative">
     <div class="text-center mb-6">
-      <h1 class="text-2xl mb-4 dark:text-white">Hello Again!</h1>
+      <h1 class="text-2xl mb-4 dark:text-white">{{ t("hello-again") }}</h1>
       <p class="text-gray-600 dark:text-white">
         Login to borrow many books as you wish.
       </p>
     </div>
     <div class="mb-5 flex flex-col">
       <label for="email" class="text-gray-600 dark:text-white">
-        Email
+        {{ t("email") }}
         <span v-if="emailIsValid" class="text-red-500 text-lg">*</span>
       </label>
       <div class="relative">
@@ -103,7 +106,7 @@ const passwordIsValid = computed((): boolean => {
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 absolute top-2 right-2"
+          class="h-6 w-6 absolute top-2 right-2 dark:stroke-white"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -116,7 +119,7 @@ const passwordIsValid = computed((): boolean => {
     </div>
     <div class="mb-3 flex flex-col w-full">
       <label for="password" class="text-gray-600 dark:text-white">
-        Password
+        {{ t("password") }}
         <span v-if="passwordIsValid" class="text-red-500 text-lg">*</span>
       </label>
       <div class="relative">
@@ -131,7 +134,7 @@ const passwordIsValid = computed((): boolean => {
         />
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 absolute top-2 right-2"
+          class="h-6 w-6 absolute top-2 right-2 dark:stroke-white"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -144,9 +147,9 @@ const passwordIsValid = computed((): boolean => {
     </div>
     <div class="mb-5 flex justify-between">
       <div class="flex items-center gap-2">
-        <label for="rmb" class="text-gray-600 dark:text-white"
-          >Remember me</label
-        >
+        <label for="rmb" class="text-gray-600 dark:text-white">{{
+          t("remember")
+        }}</label>
         <input
           type="checkbox"
           name="remember_me"
@@ -156,16 +159,16 @@ const passwordIsValid = computed((): boolean => {
       </div>
       <div>
         <p class="text-indigo-600 dark:text-secondary cursor-pointer">
-          Forgot password?
+          {{ `${t("forgot")}?` }}
         </p>
       </div>
     </div>
     <hr />
     <div class="flex justify-center items-center mt-5">
       <button
-        class="login-btn rounded-md border border-indigo-600 dark:text-white dark:border-white px-5 py-2 focus:outline-none hover:bg-indigo-600 dark:hover:text-midDark dark:hover:bg-white transition-all flex"
+        class="login-btn rounded-md border border-indigo-600 dark:text-white px-5 py-2 focus:outline-none hover:bg-indigo-600 hover:text-white dark:hover:text-midDark dark:hover:bg-white transition-all flex"
       >
-        Login
+        {{ t("login") }}
       </button>
       <div class="px-5 py-2 hidden">
         <hollow-dots-spinner
