@@ -1,0 +1,13 @@
+{
+  "register": "Register",
+  "login": "Login",
+  "password": "Password",
+  "confirm": "Confirm",
+  "hello-again": "Hello Again",
+  "email": "Email",
+  "remember": "Remember Me",
+  "forgot": "Forgot password",
+  "whatsup": "What's up",
+  "light": "Light",
+  "dark": "Dark"
+}

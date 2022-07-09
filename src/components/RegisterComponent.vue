@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { HollowDotsSpinner } from "epic-spinners";
 import { computed, Ref, ref } from "vue";
+import { useI18n } from "vue-i18n";
 import router from "../router";
 import { useGlobalMessage } from "../store/useGlobalMessage";
 import { useUser } from "../store/users";
@@ -31,6 +32,8 @@ const isLoading = ref(false);
 
 const main = useGlobalMessage();
 const user = useUser();
+
+const { t } = useI18n();
 
 const handleSubmit = (): void => {
   if (
@@ -118,14 +121,17 @@ const isMatched = computed((): boolean => {
 <template>
   <form @submit.prevent="handleSubmit">
     <div class="text-center mb-6">
-      <h1 class="text-2xl mb-4 dark:text-white">What's up</h1>
+      <h1 class="text-2xl mb-4 dark:text-white">{{ t("whatsup") }}</h1>
       <p class="text-gray-600 dark:text-white">
         Register to borrow many books as you wish.
       </p>
     </div>
     <div class="mb-5 flex flex-col">
-      <label for="email" class="text-gray-600 dark:text-white">
-        Email<span v-if="emailIsValid" class="text-red-500 text-lg">*</span>
+      <label for="email" class="text-gray-600 dark:text-white relative">
+        {{ t("email") }}
+        <span v-if="emailIsValid" class="absolute text-red-500 text-lg">
+          *
+        </span>
       </label>
       <div class="relative">
         <input
@@ -150,9 +156,11 @@ const isMatched = computed((): boolean => {
       </div>
     </div>
     <div class="mb-5 flex flex-col w-full">
-      <label for="password" class="text-gray-600 dark:text-white">
-        Password
-        <span v-if="passwordIsValid" class="text-red-500 text-lg">*</span>
+      <label for="password" class="text-gray-600 dark:text-white relative">
+        {{ t("password") }}
+        <span v-if="passwordIsValid" class="text-red-500 text-lg absolute">
+          *
+        </span>
       </label>
       <div class="relative">
         <input
@@ -178,10 +186,10 @@ const isMatched = computed((): boolean => {
     </div>
     <div class="mb-5 flex flex-col w-full">
       <label for="password" class="text-gray-600 dark:text-white">
-        Confirm Password
-        <span v-if="confirmIsValid || isMatched" class="text-red-500 text-lg"
-          >*</span
-        >
+        {{ t("confirm") }}
+        <span v-if="confirmIsValid || isMatched" class="text-red-500 text-lg">
+          *
+        </span>
       </label>
       <div class="relative">
         <input
@@ -209,9 +217,9 @@ const isMatched = computed((): boolean => {
     <div class="flex justify-center items-center my-5">
       <button
         v-if="!isLoading"
-        class="login-btn rounded-md border border-indigo-400 px-5 py-2 hover:bg-indigo-400 hover:text-white transition-all"
+        class="login-btn rounded-md border border-indigo-400 px-5 py-2 text-white hover:bg-indigo-400 dark:hover:text-white hover:text-white transition-all"
       >
-        Register
+        {{ t("register") }}
       </button>
       <div v-else class="my-5">
         <hollow-dots-spinner

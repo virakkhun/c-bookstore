@@ -4,12 +4,12 @@
       class="w-full h-96 md:flex md:flex-row flex flex-col justify-between items-center"
     >
       <div
-        class="md:w-1/2 w-full bg-midPrimary dark:bg-midDark dark:text-white h-full flex justify-center items-center"
+        class="md:w-1/2 w-full bg-midPrimary dark:bg-midDark text-white h-full flex justify-center items-center"
       >
         <div class="w-full h-full flex justify-start items-center">
           <div class="ml-10">
-            <h3 class="text-xl">Just Learn</h3>
-            <h1 class="text-5xl">Feel Power</h1>
+            <h3 class="text-xl">Start Reading,</h3>
+            <h1 class="text-3xl">Define your strength</h1>
           </div>
         </div>
       </div>
@@ -33,7 +33,7 @@
         <div class="mx-auto max-w-fit mt-5 items-center">
           <router-link
             to="/books"
-            class="flex items-center px-5 py-3 md:text-base text-sm bg-midPrimary dark:bg-midDark hover:bg-primary dark:hover:bg-midPrimary rounded"
+            class="flex items-center px-5 py-3 md:text-base text-sm bg-midPrimary dark:bg-dark hover:bg-primary dark:hover:bg-midPrimary rounded"
           >
             <span class="dark:text-white"> Browse Book </span>
           </router-link>

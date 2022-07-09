@@ -2,7 +2,9 @@
 import { computed, onMounted, ref } from "vue";
 import { useUser } from "../../store/users";
 import { useDark, useToggle } from "@vueuse/core";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const isShowMenu = ref<boolean>(false);
 const isShowLogin = ref<boolean>(false);
 const loginPop = ref<HTMLElement | null>(null);
@@ -43,16 +45,12 @@ const getRandomImage = computed((): string => {
 
 <template>
   <nav
-    class="w-full bg-white dark:bg-slate-900 md:px-6 py-2 px-3 md:items-center"
+    class="w-full bg-white dark:bg-slate-900 md:px-12 py-2 px-3 md:items-center"
   >
     <div class="flex justify-between items-center relative">
-      <div>
-        <img
-          src="https://logodownload.org/wp-content/uploads/2021/10/meta-logo-4.png"
-          width="60"
-          alt=""
-        />
-      </div>
+      <router-link to="/">
+        <p class="dark:text-white font-semibold">C-Bookstore</p>
+      </router-link>
       <div class="bg-white dark:bg-slate-900 flex items-center md:gap-10">
         <Transition name="fadeUpMenu" mode="out-in">
           <svg
@@ -86,16 +84,16 @@ const getRandomImage = computed((): string => {
             </li>
             <li class="">
               <router-link
-                to="#"
+                to="/about"
                 class="text-base hover:text-primary dark:hover:text-midPrimary duration-300"
                 >About Us</router-link
               >
             </li>
             <li class="">
               <router-link
-                to="/#"
+                to="/payment"
                 class="text-base hover:text-primary dark:hover:text-midPrimary duration-300"
-                >Contact US</router-link
+                >Payment</router-link
               >
             </li>
             <li>
@@ -125,10 +123,10 @@ const getRandomImage = computed((): string => {
         />
         <Transition name="pop-up-setting">
           <div
-            class="absolute md:top-12 top-10 md:text-base text-sm right-0 rounded shadow-md bg-white dark:bg-slate-900 md:w-36 w-24 md:pl-3 pl-1 md:py-4 py-2 border"
+            class="z-10 absolute md:top-12 top-10 md:text-base text-sm right-0 rounded shadow-md bg-white dark:bg-slate-900 md:w-36 w-24 md:pl-3 pl-1 md:py-4 py-2 border"
             v-if="isShowLogin"
           >
-            <div v-if="!isAuth">
+            <div v-if="!isAuth" class="flex flex-col gap-3">
               <div
                 class="flex items-center gap-2 hover:text-primary dark:hover:text-midPrimary"
                 @click="toggleDarkMode()"
@@ -145,7 +143,7 @@ const getRandomImage = computed((): string => {
                     clip-rule="evenodd"
                   />
                 </svg>
-                <p>{{ isDark ? "Light" : "Dark" }}</p>
+                <p>{{ isDark ? t("light") : t("dark") }}</p>
               </div>
               <div
                 class="flex items-center gap-2 hover:text-primary dark:hover:text-midPrimary"
@@ -164,7 +162,7 @@ const getRandomImage = computed((): string => {
                     />
                   </svg>
                 </div>
-                <router-link to="/login">Login</router-link>
+                <router-link to="/login">{{ t("login") }}</router-link>
               </div>
             </div>
             <div v-else>
@@ -175,7 +173,7 @@ const getRandomImage = computed((): string => {
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
-                    class="md:h-5 md:w-5 h-3 w-3"
+                    class="md:h-5 md:w-5"
                     viewBox="0 0 20 20"
                     fill="currentColor"
                   >

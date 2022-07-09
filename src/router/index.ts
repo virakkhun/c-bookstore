@@ -9,6 +9,8 @@ import login from "../views/auth/login.vue";
 import register from "../views/auth/register.vue";
 import userProfile from "../views/users/index.vue";
 import registerEmail from "../views/auth/sing-up-email.vue";
+import about from "../views/about/index.vue";
+import payment from "../views/payment/index.vue";
 
 const routes = [
   {
@@ -40,6 +42,23 @@ const routes = [
         meta: {
           title: "Profile",
           requireAuth: true,
+        },
+      },
+      {
+        path: "/about",
+        name: "about-us",
+        component: about,
+        meta: {
+          title: "About us",
+          requireAuth: false,
+        },
+      },
+      {
+        path: "/payment",
+        name: "payment",
+        component: payment,
+        meta: {
+          title: "Payment",
         },
       },
       {

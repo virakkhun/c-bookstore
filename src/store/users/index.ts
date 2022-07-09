@@ -23,7 +23,7 @@ interface LoginCredential {
 }
 
 export const useUser = defineStore("user", {
-  state: (): Users => {
+  state: () => {
     return {
       user: {},
       token: "",
@@ -72,7 +72,7 @@ export const useUser = defineStore("user", {
           this.msg = "The credentials you are providing is not correct.";
         }
       } catch (error: any) {
-        this.msg = error.response.data.message;
+        this.msg = error;
       }
     },
     async fetchUser(): Promise<void> {
